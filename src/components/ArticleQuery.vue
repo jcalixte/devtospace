@@ -1,19 +1,31 @@
 <template>
   <div class="hello">
     <h3>Articles</h3>
-    <ul>
-      <li v-for="article in articles" :key="article.id">
-        <input
-          type="checkbox"
-          :value="article.id"
-          name="stored-article"
-          v-model="storedArticles"
-        />
-        <router-link :to="{ name: 'article', params: { id: article.id } }">
-          {{ article.title }}
-        </router-link>
-      </li>
-    </ul>
+    <button class="button is-primary" @click="share">Partager</button>
+    <div class="table-container">
+      <table class="table is-striped is-hoverable is-fullwidth">
+        <tbody>
+          <tr v-for="article in articles" :key="article.id">
+            <td class="checkbox-container">
+              <input
+                type="checkbox"
+                :value="article.id"
+                name="stored-article"
+                v-model="storedArticles"
+              />
+            </td>
+            <td>
+              <router-link
+                :to="{ name: 'article', params: { id: article.id } }"
+              >
+                {{ article.title }}
+              </router-link>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <button class="button is-info" @click="page++">Charger plus</button>
   </div>
 </template>
@@ -34,6 +46,21 @@ export default class ArticleQuery extends Vue {
   private async mounted() {
     this.articles = await ArticleService.queryAllArticles(this.page)
     this.storedArticles = await ArticleService.allStoredIds()
+  }
+
+  private share() {
+    if ('bluetooth' in navigator) {
+      navigator.bluetooth
+        .requestDevice({
+          acceptAllDevices: true
+        })
+        .then((device: any) => {
+          console.log('Name: ' + device.name)
+        })
+        .catch((error: any) => {
+          console.log('Something went wrong. ' + error)
+        })
+    }
   }
 
   @Watch('page')
@@ -65,4 +92,8 @@ export default class ArticleQuery extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.checkbox-container {
+  text-align: center;
+}
+</style>

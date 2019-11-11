@@ -26,7 +26,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { IArticle } from '../models/IArticle'
 import ArticleService from '../services/ArticleService'
 import { renderMarkdown } from '@/utils'
-import 'highlight.js/scss/default.scss'
+import 'highlight.js/scss/vs.scss'
 
 @Component
 export default class Article extends Vue {
@@ -81,6 +81,7 @@ export default class Article extends Vue {
     border: 2px solid black;
     border-radius: 4px;
     padding: 5px;
+    margin: 5px 0;
   }
 
   h1 {

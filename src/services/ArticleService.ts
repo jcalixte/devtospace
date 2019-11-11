@@ -31,14 +31,15 @@ class ArticleService {
   public async storeArticle(id: number, update?: boolean): Promise<boolean> {
     const article = await this.queryArticle(id)
     if (article) {
+      const notifyMessage = `Article "${article.title}" ajouté !`
       const oldArticle = await repository.get(this.getStoreId(id))
       if (oldArticle) {
         if (update) {
-          notify('Article ajouté !')
+          notify(notifyMessage)
           return await repository.update(this.getStoreId(id), article)
         }
       } else {
-        notify('Article ajouté !')
+        notify(notifyMessage)
         return await this.saveArticle(article)
       }
     }
@@ -50,7 +51,12 @@ class ArticleService {
   }
 
   public async removeArticle(id: number): Promise<boolean> {
-    notify('Article supprimé...')
+    const article = await this.get(id)
+    if (!article) {
+      return false
+    }
+    const notifyMessage = `Article "${article.title}" supprimé...`
+    notify(notifyMessage)
     return await repository.remove(this.getStoreId(id))
   }
 
