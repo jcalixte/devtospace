@@ -1,29 +1,5 @@
 # devtohubs
 
-## Project setup
-```
-yarn install
-```
+`devtohubs` is a project with shareability in mind.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Download [dev.to](https://dev.to) articles once and share them in Bluetooth once offline with others!
