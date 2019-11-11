@@ -1,7 +1,5 @@
 <template>
   <div class="hello">
-    <h3>Articles</h3>
-    <button class="button is-primary" @click="share">Partager</button>
     <div class="table-container">
       <table class="table is-striped is-hoverable is-fullwidth">
         <tbody>

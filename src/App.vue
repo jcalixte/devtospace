@@ -1,10 +1,22 @@
 <template>
-  <div id="app" class="container is-fluid">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app">
+    <nav
+      class="navbar is-primary"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <router-link to="/" class="navbar-item">Dev.to Hub</router-link>
+      </div>
+      <div class="navbar-menu">
+        <!-- navbar start, navbar end -->
+        <router-link to="/about" class="navbar-item">About</router-link>
+      </div>
+    </nav>
+    <h1 class="title is-1"></h1>
+    <main class="container is-fluid">
+      <router-view />
+    </main>
   </div>
 </template>
 
