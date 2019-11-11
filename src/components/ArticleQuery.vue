@@ -48,16 +48,9 @@ export default class ArticleQuery extends Vue {
 
   private share() {
     if ('bluetooth' in navigator) {
-      navigator.bluetooth
-        .requestDevice({
-          acceptAllDevices: true
-        })
-        .then((device: any) => {
-          console.log('Name: ' + device.name)
-        })
-        .catch((error: any) => {
-          console.log('Something went wrong. ' + error)
-        })
+      navigator.bluetooth.requestDevice({
+        acceptAllDevices: true
+      })
     }
   }
 
