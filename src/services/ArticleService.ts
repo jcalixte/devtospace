@@ -1,12 +1,14 @@
-import { constructURL } from '@/utils'
+import { constructURL, notify } from '@/utils'
 import { IArticleItem, IArticle } from '@/models/IArticle'
 import repository from '@/repository/repository'
 
 class ArticleService {
   private baseUrl = process.env.VUE_APP_DEV_URL || ''
 
-  public async queryAllArticles(): Promise<IArticleItem[]> {
-    const response = await fetch(constructURL(this.baseUrl, 'articles'))
+  public async queryAllArticles(page = 1): Promise<IArticleItem[]> {
+    const response = await fetch(
+      constructURL(this.baseUrl, 'articles', { page })
+    )
     const articles = <IArticleItem[]>await response.json()
     return articles
   }
@@ -32,9 +34,11 @@ class ArticleService {
       const oldArticle = await repository.get(this.getStoreId(id))
       if (oldArticle) {
         if (update) {
+          notify('Article ajouté !')
           return await repository.update(this.getStoreId(id), article)
         }
       } else {
+        notify('Article ajouté !')
         return await this.saveArticle(article)
       }
     }
@@ -46,6 +50,7 @@ class ArticleService {
   }
 
   public async removeArticle(id: number): Promise<boolean> {
+    notify('Article supprimé...')
     return await repository.remove(this.getStoreId(id))
   }
 
