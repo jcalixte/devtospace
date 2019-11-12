@@ -1,6 +1,6 @@
 <template>
   <div class="article-query">
-    <p v-if="online">Check articles you want to read once offline</p>
+    <p v-if="online">You can check articles you want to read once offline</p>
     <p v-else>Here are all the articles you can read offline</p>
     <div class="table-container">
       <table
