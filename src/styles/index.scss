@@ -1,2 +1,7 @@
-@import '~bulma';
+@charset "utf-8";
+
+$primary: #40739e;
+
+@import '~bulma/bulma.sass';
+@import '~notyf/notyf.min.css';
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');

@@ -1,6 +1,8 @@
 import { constructURL } from '@/utils'
 import { IArticleItem, IArticle } from '@/models/IArticle'
 import repository from '@/repository/repository'
+import { Notyf } from 'notyf'
+const notif = new Notyf()
 
 class ArticleService {
   private baseUrl = process.env.VUE_APP_DEV_URL || ''
@@ -31,12 +33,15 @@ class ArticleService {
   public async storeArticle(id: number, update?: boolean): Promise<boolean> {
     const article = await this.queryArticle(id)
     if (article) {
+      const notifMessage = `Article ${article.title} ajouté !`
       const oldArticle = await repository.get(this.getStoreId(id))
       if (oldArticle) {
         if (update) {
+          notif.success(notifMessage)
           return await repository.update(this.getStoreId(id), article)
         }
       } else {
+        notif.success(notifMessage)
         return await this.saveArticle(article)
       }
     }
@@ -52,6 +57,7 @@ class ArticleService {
     if (!article) {
       return false
     }
+    notif.success(`Article ${article.title} supprimé.`)
     return await repository.remove(this.getStoreId(id))
   }
 
