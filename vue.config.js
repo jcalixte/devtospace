@@ -6,6 +6,6 @@ module.exports = {
       skipWaiting: true,
       clientsClaim: true
     },
-    name: 'DevToHubs'
+    name: 'DEV HUB'
   }
 }

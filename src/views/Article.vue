@@ -4,18 +4,18 @@
       <h1 class="title is-1">{{ article.title }}</h1>
       <h2 class="subtitle is-2">{{ article.user.name }}</h2>
       <h3 class="subtitle is-3">
-        <a :href="article.url">Lien original</a>
+        <a :href="article.url">original link</a>
       </h3>
       <article v-html="body"></article>
     </section>
     <section v-else-if="!articleLoaded" class="no-article">
-      <p>L'article ne semble pas avoir été téléchargé sur votre appareil...</p>
+      <p>The article seems to ne be available offline...</p>
       <button
         @click="download"
         class="button is-primary"
         :class="{ 'is-loading': loading }"
       >
-        Télécharger l'article
+        Download
       </button>
     </section>
   </div>

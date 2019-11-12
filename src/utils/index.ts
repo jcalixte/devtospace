@@ -1,5 +1,6 @@
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import { Notyf } from 'notyf'
 
 interface IQueryParam {
   [key: string]: string | number
@@ -34,4 +35,20 @@ export const renderMarkdown = (markdown: string): string => {
     }
   })
   return md.render(markdown)
+}
+
+const notif = new Notyf()
+
+export const success = (message: string) => {
+  notif.success({
+    backgroundColor: '#40739e',
+    message
+  })
+}
+
+export const error = (message: string) => {
+  notif.error({
+    backgroundColor: '#ee5253',
+    message
+  })
 }

@@ -1,7 +1,12 @@
 <template>
   <div class="hello">
     <div class="table-container">
-      <table class="table is-striped is-hoverable is-fullwidth">
+      <table
+        class="table is-striped is-hoverable is-fullwidth"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="busy"
+        infinite-scroll-distance="10"
+      >
         <tbody>
           <tr v-for="article in articles" :key="article.id">
             <td class="checkbox-container">
@@ -23,8 +28,6 @@
         </tbody>
       </table>
     </div>
-
-    <button class="button is-info" @click="page++">Charger plus</button>
   </div>
 </template>
 
@@ -33,14 +36,18 @@ declare const navigator: any
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { IArticleItem } from '@/models/IArticle'
 import ArticleService from '@/services/ArticleService'
+import infiniteScroll from 'vue-infinite-scroll'
 
-@Component
+@Component({
+  directives: { infiniteScroll }
+})
 export default class ArticleQuery extends Vue {
   private articles: IArticleItem[] = []
   private storedArticles: number[] = []
   private page: number = 1
+  private busy: boolean = false
 
-  private async mounted() {
+  private async created() {
     this.articles = await ArticleService.queryAllArticles(this.page)
     this.storedArticles = await ArticleService.allStoredIds()
   }
@@ -53,17 +60,19 @@ export default class ArticleQuery extends Vue {
     }
   }
 
-  @Watch('page')
-  private async onPageChange(page: number) {
+  private async loadMore() {
+    this.busy = true
+    this.page = this.page + 1
     const articles = [
       ...this.articles,
-      ...(await ArticleService.queryAllArticles(page))
+      ...(await ArticleService.queryAllArticles(this.page))
     ]
     const uniques = new Map()
     articles.forEach((article) => {
       uniques.set(article.id, article)
     })
     this.articles = [...uniques.values()]
+    this.busy = false
   }
 
   @Watch('storedArticles')

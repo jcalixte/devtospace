@@ -6,11 +6,9 @@
       aria-label="main navigation"
     >
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">Dev.to Hub</router-link>
-      </div>
-      <div class="navbar-menu">
-        <!-- navbar start, navbar end -->
-        <router-link to="/about" class="navbar-item">About</router-link>
+        <router-link to="/" class="navbar-item">
+          <img src="./assets/logo.png" />
+        </router-link>
       </div>
     </nav>
     <h1 class="title is-1"></h1>
