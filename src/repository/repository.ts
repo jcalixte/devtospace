@@ -2,7 +2,7 @@ import PouchDb from 'pouchdb-browser'
 import IModel from '@/models/IModel'
 
 class Repository {
-  private database: PouchDB.Database = new PouchDb('devtohub')
+  private database: PouchDB.Database = new PouchDb('devtospace')
 
   public async get<T>(id: string): Promise<T | null> {
     try {
