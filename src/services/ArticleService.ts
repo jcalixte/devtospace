@@ -5,6 +5,10 @@ import repository from '@/repository/repository'
 class ArticleService {
   private baseUrl = process.env.VUE_APP_DEV_URL || ''
 
+  public async queryAllStoredArticles(): Promise<IArticleItem[]> {
+    return await repository.allDocs('article')
+  }
+
   public async queryAllArticles(page = 1): Promise<IArticleItem[]> {
     const response = await fetch(
       constructURL(this.baseUrl, 'articles', { page })

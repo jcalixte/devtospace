@@ -24,6 +24,19 @@ class Repository {
     return allDocs.rows.map((row) => row.id)
   }
 
+  public async allDocs<T>(prefix?: string): Promise<T[]> {
+    if (prefix) {
+      const allDocs = await this.database.allDocs({
+        startkey: `${prefix}`,
+        endkey: `${prefix}\ufff0`,
+        include_docs: true
+      })
+      return allDocs.rows.map((row) => (row.doc as unknown) as T)
+    }
+    const allDocs = await this.database.allDocs()
+    return allDocs.rows.map((row) => (row.doc as unknown) as T)
+  }
+
   public async save(model: IModel): Promise<boolean> {
     try {
       const response = await this.database.put(model)

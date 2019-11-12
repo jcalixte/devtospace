@@ -33,7 +33,7 @@
 
 <script lang="ts">
 declare const navigator: any
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { IArticleItem } from '@/models/IArticle'
 import ArticleService from '@/services/ArticleService'
 import infiniteScroll from 'vue-infinite-scroll'
@@ -42,13 +42,17 @@ import infiniteScroll from 'vue-infinite-scroll'
   directives: { infiniteScroll }
 })
 export default class ArticleQuery extends Vue {
+  @Prop({ type: Boolean, default: true })
+  private online!: boolean
   private articles: IArticleItem[] = []
   private storedArticles: number[] = []
   private page: number = 1
   private busy: boolean = false
 
   private async created() {
-    this.articles = await ArticleService.queryAllArticles(this.page)
+    this.articles = this.online
+      ? await ArticleService.queryAllArticles(this.page)
+      : await ArticleService.queryAllStoredArticles()
     this.storedArticles = await ArticleService.allStoredIds()
   }
 
@@ -61,6 +65,9 @@ export default class ArticleQuery extends Vue {
   }
 
   private async loadMore() {
+    if (!this.online) {
+      return
+    }
     this.busy = true
     this.page = this.page + 1
     const articles = [

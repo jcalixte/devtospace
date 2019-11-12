@@ -10729,6 +10729,14 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-online-offline@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue-online-offline/-/vue-online-offline-1.0.4.tgz#b62415204d521eea950958af68c4485edafbc2f9"
+  integrity sha512-yzYegZ3haD3Wu07adqueE8WhHNw8La+fdxuZo105I0tczQELyKpl77BhbXXprbFDFnJT15g5S1ddygoGzlTcJg==
+  dependencies:
+    core-js "^3.3.2"
+    vue "^2.6.10"
+
 vue-property-decorator@^8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-8.3.0.tgz#536f027dc7d626f37c8d85a2dc02f0a6cb979440"
