@@ -1,5 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="article-query">
+    <p v-if="online">Check articles you want to read once offline</p>
+    <p v-else>Here are all the articles you can read offline</p>
     <div class="table-container">
       <table
         class="table is-striped is-hoverable is-fullwidth"
@@ -9,7 +11,7 @@
       >
         <tbody>
           <tr v-for="article in articles" :key="article.id">
-            <td class="checkbox-container">
+            <td class="checkbox-container" v-if="online">
               <input
                 type="checkbox"
                 :value="article.id"
