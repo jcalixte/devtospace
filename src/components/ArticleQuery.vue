@@ -33,7 +33,6 @@ declare const navigator: any
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { IArticleItem } from '@/models/IArticle'
 import ArticleService from '@/services/ArticleService'
-import { notify } from '../utils'
 
 @Component
 export default class ArticleQuery extends Vue {
