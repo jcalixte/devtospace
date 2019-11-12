@@ -2,7 +2,7 @@
   <div class="home">
     <article class="message is-primary">
       <div class="message-header">
-        <p>Welcome to DEV HUB !</p>
+        <p>Welcome to DEV to SPACE !</p>
       </div>
       <div class="message-body">
         <p>
