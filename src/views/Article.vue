@@ -9,7 +9,7 @@
       <article v-html="body"></article>
     </section>
     <section v-else-if="!articleLoaded" class="no-article">
-      <p>The article seems to ne be available offline...</p>
+      <p>The article does not seem to be available offline...</p>
       <button
         @click="download"
         class="button is-primary"
