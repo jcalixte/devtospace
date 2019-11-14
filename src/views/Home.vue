@@ -21,8 +21,8 @@
     </article>
 
     <VueOnlineOffline>
-      <ArticleQuery slot="online" :online="true" />
-      <ArticleQuery slot="offline" :online="false" />
+      <ArticleQuery slot="online" key="online" :online="true" />
+      <ArticleQuery slot="offline" key="offline" :online="false" />
     </VueOnlineOffline>
   </div>
 </template>

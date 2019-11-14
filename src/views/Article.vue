@@ -2,10 +2,9 @@
   <div class="article-component">
     <article v-if="!articleLoaded" class="message is-primary no-article">
       <div class="message-header">
-        <p>This article is not available offline</p>
+        <p>The article does not seem to be available offline...</p>
       </div>
       <div class="message-body">
-        <p>The article does not seem to be available offline...</p>
         <button
           @click="download"
           class="button is-primary"
