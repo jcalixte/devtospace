@@ -1,16 +1,17 @@
 <template>
   <div class="article-component">
     <article v-if="!articleLoaded" class="message is-primary no-article">
-      <div class="message-header">
-        <p>The article does not seem to be available offline...</p>
-      </div>
       <div class="message-body">
+        <p>
+          The article is not available offline...
+        </p>
+        <br />
         <button
           @click="download"
           class="button is-primary"
           :class="{ 'is-loading': loading }"
         >
-          Download
+          download
         </button>
       </div>
     </article>
