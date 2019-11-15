@@ -16,6 +16,11 @@
       </div>
     </article>
     <section v-if="article" class="article">
+      <img
+        v-if="article.cover_image"
+        :src="article.cover_image"
+        alt="Cover image"
+      />
       <h1 class="title is-1">{{ article.title }}</h1>
       <h2 class="subtitle is-2">{{ article.user.name }}</h2>
       <h3 class="subtitle is-3">
@@ -77,6 +82,12 @@ export default class Article extends Vue {
 </script>
 
 <style lang="scss">
+.article {
+  img {
+    display: block;
+    margin: auto;
+  }
+}
 .article-body {
   padding: 15px;
   font-family: 'Quicksand', sans-serif;
