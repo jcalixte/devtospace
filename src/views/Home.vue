@@ -1,8 +1,13 @@
 <template>
   <div class="home">
-    <article class="message is-primary">
+    <article class="message is-primary" v-if="!hideMessage">
       <div class="message-header">
         <p>Welcome to DEV to SPACE !</p>
+        <button
+          class="delete"
+          aria-label="delete"
+          @click="actionToHideMessage"
+        ></button>
       </div>
       <div class="message-body">
         <p>
@@ -30,10 +35,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import ArticleQuery from '../components/ArticleQuery.vue'
+import { Getter, Action } from 'vuex-class'
 import VueOnlineOffline from 'vue-online-offline'
 
 @Component({
   components: { ArticleQuery, VueOnlineOffline }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  @Getter
+  private hideMessage!: boolean
+  @Action
+  private actionToHideMessage!: any
+}
 </script>
