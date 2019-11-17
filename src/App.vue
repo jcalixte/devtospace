@@ -11,7 +11,6 @@
         </router-link>
       </div>
     </nav>
-    <h1 class="title is-1"></h1>
     <main class="container is-fluid">
       <router-view />
     </main>

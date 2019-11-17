@@ -1,35 +1,38 @@
 <template>
   <div class="article-query">
-    <p v-if="online">You can check articles you want to read once offline</p>
+    <p v-if="online">
+      <em>You can check articles you want to read once offline</em>
+    </p>
     <p v-else>Here are all the articles you can read offline</p>
-    <div class="table-container">
-      <table
-        class="table is-striped is-hoverable is-fullwidth"
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="busy"
-        infinite-scroll-distance="10"
-      >
-        <tbody>
-          <tr v-for="article in articles" :key="article.id">
-            <td class="checkbox-container" v-if="online">
-              <input
-                type="checkbox"
-                :value="article.id"
-                name="stored-article"
-                v-model="storedArticles"
-              />
-            </td>
-            <td>
-              <router-link
-                :to="{ name: 'article', params: { id: article.id } }"
-              >
-                {{ article.title }}
-              </router-link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <stack
+      :column-min-width="320"
+      :monitor-images-loaded="true"
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="10"
+    >
+      <stack-item v-for="article in articles" :key="article.id">
+        <div class="article-item">
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              :value="article.id"
+              name="stored-article"
+              v-model="storedArticles"
+            />
+          </div>
+          <router-link :to="{ name: 'article', params: { id: article.id } }">
+            <img
+              v-if="article.cover_image"
+              :src="article.cover_image"
+              alt="Cover image"
+            />
+            <div class="article-title">{{ article.title }}</div>
+          </router-link>
+          <hr />
+        </div>
+      </stack-item>
+    </stack>
   </div>
 </template>
 
@@ -39,9 +42,11 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { IArticleItem } from '@/models/IArticle'
 import ArticleService from '@/services/ArticleService'
 import infiniteScroll from 'vue-infinite-scroll'
+import { Stack, StackItem } from 'vue-stack-grid'
 
 @Component({
-  directives: { infiniteScroll }
+  directives: { infiniteScroll },
+  components: { Stack, StackItem }
 })
 export default class ArticleQuery extends Vue {
   @Prop({ type: Boolean, default: true })
@@ -101,7 +106,23 @@ export default class ArticleQuery extends Vue {
 </script>
 
 <style scoped lang="scss">
+$border-radius: 10px;
+
 .checkbox-container {
   text-align: center;
+  position: absolute;
+  right: $border-radius;
+  top: $border-radius;
+}
+.article-item {
+  margin: 5px;
+
+  img {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+  .article-title {
+    margin: 5px;
+  }
 }
 </style>

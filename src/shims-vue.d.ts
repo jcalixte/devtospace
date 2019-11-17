@@ -4,3 +4,4 @@ declare module '*.vue' {
 }
 declare module 'vue-infinite-scroll'
 declare module 'vue-online-offline'
+declare module 'vue-stack-grid'

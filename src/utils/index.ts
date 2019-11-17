@@ -15,7 +15,7 @@ export const constructURL = (
   const params = queryParams
     ? queryParamKeys.map((key) => `${key}=${queryParams[key]}`)
     : ''
-  const stringParams = params ? `?${params}` : ''
+  const stringParams = params ? `?${params.join('&')}` : ''
 
   return `${baseURL}${append}${stringParams}`
 }
