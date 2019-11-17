@@ -30,4 +30,9 @@
 #nav {
   padding: 30px;
 }
+main {
+  &.container {
+    margin-top: 10px;
+  }
+}
 </style>

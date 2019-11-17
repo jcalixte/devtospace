@@ -6,7 +6,7 @@
     <p v-else>Here are all the articles you can read offline</p>
     <stack
       :column-min-width="320"
-      :monitor-images-loaded="true"
+      monitor-images-loaded
       v-infinite-scroll="loadMore"
       infinite-scroll-disabled="busy"
       infinite-scroll-distance="10"
@@ -114,13 +114,10 @@ $border-radius: 10px;
   right: $border-radius;
   top: $border-radius;
 }
+
 .article-item {
   margin: 5px;
 
-  img {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
-  }
   .article-title {
     margin: 5px;
   }

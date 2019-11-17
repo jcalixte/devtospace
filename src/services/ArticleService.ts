@@ -6,7 +6,9 @@ class ArticleService {
   private baseUrl = process.env.VUE_APP_DEV_URL || ''
 
   public async queryAllStoredArticles(): Promise<IArticleItem[]> {
-    return await repository.allDocs('article')
+    return (await repository.allDocs<IArticleItem>('article')).sort((a, b) =>
+      new Date(a.published_at) < new Date(b.published_at) ? -1 : 1
+    )
   }
 
   public async queryAllArticles(page = 1): Promise<IArticleItem[]> {

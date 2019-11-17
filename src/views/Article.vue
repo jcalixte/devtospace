@@ -3,7 +3,7 @@
     <article v-if="!articleLoaded" class="message is-primary no-article">
       <div class="message-body">
         <p>
-          The article is not available offline...
+          The article is not available offline.
         </p>
         <br />
         <button
@@ -22,7 +22,9 @@
         alt="Cover image"
       />
       <h1 class="title is-1">{{ article.title }}</h1>
-      <h2 class="subtitle is-2">{{ article.user.name }}</h2>
+      <h2 class="subtitle is-2">
+        {{ article.user.name }} — {{ article.published_at | date }}
+      </h2>
       <h3 class="subtitle is-3">
         <a :href="article.url">original link</a>
       </h3>
