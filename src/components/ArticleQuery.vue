@@ -8,8 +8,8 @@
       :column-min-width="320"
       monitor-images-loaded
       v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="busy"
-      infinite-scroll-distance="10"
+      :infinite-scroll-disabled="busy"
+      :infinite-scroll-distance="10"
     >
       <stack-item v-for="article in articles" :key="article.id">
         <div class="article-item">
