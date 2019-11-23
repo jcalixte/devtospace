@@ -77,15 +77,8 @@ export default class ArticleQuery extends Vue {
     }
     this.busy = true
     this.page = this.page + 1
-    const articles = [
-      ...this.articles,
-      ...(await ArticleService.queryAllArticles(this.page))
-    ]
-    const uniques = new Map()
-    articles.forEach((article) => {
-      uniques.set(article.id, article)
-    })
-    this.articles = [...uniques.values()]
+    const articles = await ArticleService.queryAllArticles(this.page)
+    this.articles.push(...articles)
     this.busy = false
   }
 
