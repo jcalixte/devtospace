@@ -16,6 +16,7 @@ class ArticleService {
       constructURL(this.baseUrl, 'articles', { page })
     )
     const articles = <IArticleItem[]>await response.json()
+
     return articles
   }
 
@@ -28,7 +29,7 @@ class ArticleService {
     try {
       const response = await fetch(constructURL(this.baseUrl, `articles/${id}`))
       const article = <IArticle>await response.json()
-      return article
+      return this.removeHyperlinks(article)
     } catch (error) {
       return null
     }
@@ -78,6 +79,16 @@ class ArticleService {
 
   private getStoreId(id: number): string {
     return `article-${id}`
+  }
+
+  private removeHyperlinks(article: IArticle): IArticle {
+    const regex = /---(\n+)([\s\S]*)(\n+)---/g
+    const body_markdown = article.body_markdown.replace(regex, '')
+    console.log(body_markdown, article.body_markdown)
+    return {
+      ...article,
+      body_markdown
+    }
   }
 }
 
