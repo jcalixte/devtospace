@@ -84,7 +84,7 @@ class ArticleService {
   private removeHyperlinks(article: IArticle): IArticle {
     const regex = /---(\n+)([\s\S]*)(\n+)---/g
     const body_markdown = article.body_markdown.replace(regex, '')
-    console.log(body_markdown, article.body_markdown)
+
     return {
       ...article,
       body_markdown
