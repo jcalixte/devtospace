@@ -25,6 +25,7 @@
             <img
               v-if="article.cover_image"
               :src="article.cover_image"
+              loading="lazy"
               alt="Cover image"
             />
             <div class="article-title">{{ article.title }}</div>
