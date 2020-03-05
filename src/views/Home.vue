@@ -29,7 +29,7 @@
       <VueOnlineOffline>
         <section slot="online">
           <button
-            class="button is-info"
+            class="button is-primary"
             v-if="!displayLocalArticles"
             @click="displayLocal"
           >
