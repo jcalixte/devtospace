@@ -29,7 +29,6 @@
             />
             <div class="article-title">{{ article.title }}</div>
           </router-link>
-          <hr />
         </div>
       </stack-item>
     </stack>
@@ -109,7 +108,7 @@ $border-radius: 10px;
 }
 
 .article-item {
-  margin: 5px;
+  margin: 15px 5px;
 
   .article-title {
     margin: 5px;

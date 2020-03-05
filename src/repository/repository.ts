@@ -14,14 +14,14 @@ class Repository {
 
   public async allDocIds(prefix?: string): Promise<string[]> {
     if (prefix) {
-      const allDocs = await this.database.allDocs({
+      const response = await this.database.allDocs({
         startkey: `${prefix}`,
         endkey: `${prefix}\ufff0`
       })
-      return allDocs.rows.map((row) => row.id)
+      return response.rows.map((row) => row.id)
     }
-    const allDocs = await this.database.allDocs()
-    return allDocs.rows.map((row) => row.id)
+    const response = await this.database.allDocs()
+    return response.rows.map((row) => row.id)
   }
 
   public async allDocs<T>(prefix?: string): Promise<T[]> {

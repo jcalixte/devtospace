@@ -25,10 +25,27 @@
       </div>
     </article>
 
-    <VueOnlineOffline>
-      <ArticleQuery slot="online" key="online" :online="true" />
-      <ArticleQuery slot="offline" key="offline" :online="false" />
-    </VueOnlineOffline>
+    <main>
+      <VueOnlineOffline>
+        <section slot="online">
+          <button
+            class="button is-info"
+            v-if="!displayLocalArticles"
+            @click="displayLocal"
+          >
+            show offline articles
+          </button>
+          <section v-if="displayLocalArticles">
+            <h3 class="title is-3">Local articles</h3>
+            <ArticleQuery :online="false" />
+            <hr />
+          </section>
+          <h3 class="title is-3">Online articles</h3>
+          <ArticleQuery slot="online" key="online" :online="true" />
+        </section>
+        <ArticleQuery slot="offline" key="offline" :online="false" />
+      </VueOnlineOffline>
+    </main>
   </div>
 </template>
 
@@ -46,5 +63,11 @@ export default class Home extends Vue {
   private hideMessage!: boolean
   @Action
   private actionToHideMessage!: any
+
+  private displayLocalArticles: boolean = false
+
+  private displayLocal() {
+    this.displayLocalArticles = true
+  }
 }
 </script>
